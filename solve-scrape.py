@@ -2,6 +2,17 @@
 %2B = +
 %3D = =
 %2F = /
+
+Symbolab:
+sin = /sin
+(=\left(
+)=\right)
+* = \cdot
+
+
+\=\frac{num}{denom}
+
+
 """
 
 import requests
@@ -20,7 +31,7 @@ if(GETINPUT == True):
 
 runWOLFRAM = True
 runCYMATH = True
-runSYMBOLAB = False
+runSYMBOLAB = True
 
 
 browser = webdriver.PhantomJS(executable_path='C:\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe')
@@ -33,6 +44,18 @@ def formaturlexpr(expr, urlbase, site):
         eu2 = eu1.replace('=','%3D')
         eu3 = eu2.replace('/','%2F')
         endurl = eu3
+        finalurl = urlbase + endurl
+        # print(finalurl)
+        return finalurl
+    elif (site == "symbolab"):
+        eu1 = expr.replace('+','%2B')
+        eu2 = eu1.replace('=','%3D')
+        eu3 = eu2.replace('/','%2F')
+        eu4 = eu3.replace('sin','/sin')
+        eu5 = eu4.replace('(','\\left(')
+        eu6 = eu5.replace(')','\\right)')
+        eu7 = eu6.replace('*','\\cdot')
+        endurl = eu7
         finalurl = urlbase + endurl
         # print(finalurl)
         return finalurl
